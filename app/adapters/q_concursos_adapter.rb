@@ -1,0 +1,2 @@
+class QConcursosAdapter
+end
