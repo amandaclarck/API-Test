@@ -10,5 +10,8 @@ module QConcursos
 
     def perform
     end
+
+    def fetch_disciplines
+    end
   end
 end
