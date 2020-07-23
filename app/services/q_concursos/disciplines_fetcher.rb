@@ -1,4 +1,4 @@
-module Qconcursos
+module QConcursos
   class DisciplinesFetcher
     def initialize(args)
       @args = args
