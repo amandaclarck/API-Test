@@ -4,12 +4,20 @@ class QConcursosRepository
     @full_url = args[:full_url]
   end
 
-  attr_reader :action, :full_url
+  attr_reader :action, :full_url, :response
 
   def request
     if action.eql? "get"
-      HTTPClient.get(url: full_url)
+      @response = HTTPClient.get(url: full_url)
     else
     end
+
+    parse_response
+  end
+
+  private
+
+  def parse_response
+    JSON.parse response.body
   end
 end
