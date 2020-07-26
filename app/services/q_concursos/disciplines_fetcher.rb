@@ -22,27 +22,21 @@ module QConcursos
     def parse_disciplines
       order = "DESC"
 
-      dates = disciplines[10..20].map do |discipline|
-        {
-          "id": discipline["id"],
-          # "statement": discipline["statement"],
-          # "text": discipline["text"],
-          # "answer": discipline["answer"],
-          "daily_access": discipline["daily_access"],
-          "discipline": discipline["discipline"],
-          "created_at": discipline["created_at"]
-        }
+      disciplines.map do |discipline|
+        unless DateTime.parse(discipline["created_at"]) <= 24.hours.ago..Time.now
+          {
+            "id": discipline["id"],
+            "statement": discipline["statement"],
+            "text": discipline["text"],
+            "answer": discipline["answer"],
+            "daily_access": discipline["daily_access"],
+            "discipline": discipline["discipline"],
+            "created_at": discipline["created_at"]
+          }
+        end
       end
-      dates.sort_by { |date| order == "DESC" ? -date[:created_at].to_i : date[:created_at] }
-      # d.sort! { |discipline| DateTime.parse(discipline[:created_at]) <=> DateTime.parse(discipline[:created_at]) }
-
-      # d.sort_by{ |discipline| discipline["created_at"] if !discipline["created_at"].blank? }
-
-      #parsear a resposta para hash
-      #parsear a data para datetime
-      #organizar pelas últimas 24 horas
-      #organizar pelo daily_access maior
-      #não deixar bater mais que 1 vez por minuto
+      .reject!(&:blank?)
+      .sort_by { |discipline| order == "DESC" ? -discipline[:daily_access].to_i : discipline[:daily_access] }
     end
   end
 end
