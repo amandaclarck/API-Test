@@ -1,7 +1,6 @@
 module QConcursos
   class DisciplinesFetcher
-    def initialize(args)
-      @args = args
+    def initialize(args = {})
       @adapter = QConcursosAdapter
     end
 
@@ -12,6 +11,7 @@ module QConcursos
     end
 
     def perform
+      fetch_disciplines
     end
 
     def fetch_disciplines
