@@ -4,7 +4,7 @@ class QConcursosRepository
     @full_url = args[:full_url]
   end
 
-  attr_reader :action
+  attr_reader :action, :full_url
 
   def request
     if action.eql? "get"
