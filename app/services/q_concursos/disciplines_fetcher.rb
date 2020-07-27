@@ -16,7 +16,9 @@ module QConcursos
     end
 
     def fetch_disciplines
-      @disciplines = adapter.get_disciplines
+      return Rails.cache.fetch(@disciplines, :expires_in => 10.minutes){
+        @disciplines = adapter.get_disciplines
+      }
     end
 
     def parse_disciplines
