@@ -18,7 +18,7 @@ class QConcursosAdapter
   def self.parameters(args)
     {
       action: args[:action],
-      full_url: "https://raw.githubusercontent.com/qcx/desafio-backend/master/" + args[:path]
+      full_url: ENV["URL"] + args[:path]
     }
   end
 end
