@@ -13,11 +13,8 @@ module QConcursos
     def perform
       fetch_questions
       parse_questions
-      year_number = 2020
-      month_number = 6
-      questions_per_year(year_number)
-
-      # questions_per_month(year_number, month_number)
+      # questions_per_year(year_number)
+      # questions_per_month(month_number, year_number)
     end
 
     def fetch_questions
@@ -42,30 +39,27 @@ module QConcursos
       
     end
 
-    # def questions_per_month(month_number, year_number)
-    #   if is_month(month_number) && is_year(year_number)
-    #     parsed_questions.sort_by do |question|
-    #       if (year_number.eql? DateTime.parse(question[:date]).year and
-    #          month_number.eql? DateTime.parse(question[:date]).month)
-    #         question
-    #       end
-    #     end
-    #   else
-    #     return {data: "No data"}
-    #   end
-    # end
+    def questions_per_month(month_number, year_number)
+      if is_month(month_number) && is_year(year_number)
+        questions = parsed_questions[0..100].map do |question|
+          if (year_number.eql? DateTime.parse(question[:date]).year and
+             month_number.eql? DateTime.parse(question[:date]).month)
+             
+            question
+          end
+        end.reject(&:blank?).sort_by { |question| -question[:times_accessed]}
+      else
+        return {data: "No data"}
+      end
+    end
 
     def questions_per_year(year_number)
-      questions = []
-
       if is_year(year_number)
-        questions = parsed_questions.map do |question| 
+        parsed_questions[10..40].map do |question| 
           if year_number == DateTime.parse(question[:date]).year
             question
           end
-        end.reject(&:blank?)
-        
-        questions.sort_by { |question| -question[:times_accessed]}
+        end.reject(&:blank?).sort_by { |question| -question[:times_accessed]}
       else
         return {data: "No data"}
       end
