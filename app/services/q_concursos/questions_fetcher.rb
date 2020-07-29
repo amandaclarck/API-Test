@@ -2,7 +2,6 @@ module QConcursos
   class QuestionsFetcher
     def initialize(args = {})
       @adapter = QConcursosAdapter
-      @params_date = {year: "2020", month: "07", day: "13"}
     end
 
     attr_reader :adapter, :questions, :parsed_questions, :params_date
@@ -18,7 +17,7 @@ module QConcursos
     end
 
     def fetch_questions
-      return Rails.cache.fetch(@questions, :expires_in => 2.minutes){
+      return Rails.cache.fetch(@questions, :expires_in => 10.minutes){
         @questions = adapter.get_questions
       }
     end
@@ -46,14 +45,15 @@ module QConcursos
         start_date = full_date.beginning_of_week
         end_date = full_date.end_of_week
         
-        questions = parsed_questions[10..20].map do |question|
+        questions = parsed_questions[40..50].map do |question|
           date = parsed_date(question[:date])
-          if (date >= start_date or date <= end_date)
+          
+          if date.between?(start_date, end_date)
             question
           end
         end
       elsif is_month_is_year
-        questions = parsed_questions[10..20].map do |question|
+        questions = parsed_questions.map do |question|
           date = parsed_date(question[:date])
           
           if (year.eql? date.year and month.eql? date.month)
@@ -61,7 +61,7 @@ module QConcursos
           end
         end
       elsif is_year(year)
-        questions = parsed_questions[10..20].map do |question|
+        questions = parsed_questions.map do |question|
           if year == parsed_date(question[:date]).year
             question
           end
