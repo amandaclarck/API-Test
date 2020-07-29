@@ -2,6 +2,7 @@ module QConcursos
   class QuestionsFetcher
     def initialize(args = {})
       @adapter = QConcursosAdapter
+      @params_date = args
     end
 
     attr_reader :adapter, :questions, :parsed_questions, :params_date
