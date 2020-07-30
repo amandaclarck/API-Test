@@ -44,7 +44,7 @@ module QConcursos
         return disciplines_array.sort_by { |discipline| order == "DESC" ? -discipline[:daily_access].to_i 
           : discipline[:daily_access] }
       else
-        return {data: "No data"}
+        return "No data"
       end
     end
   end
