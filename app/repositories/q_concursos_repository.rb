@@ -9,7 +9,6 @@ class QConcursosRepository
   def request
     if action.eql? "get"
       @response = HTTPClient.get(url: full_url)
-    else
     end
 
     parse_response
