@@ -41,9 +41,8 @@ module QConcursos
       end.reject(&:blank?)
       
       if !disciplines_array.blank?
-        result = disciplines_array.sort_by { |discipline| order == "DESC" ? -discipline[:daily_access].to_i 
+        return disciplines_array.sort_by { |discipline| order == "DESC" ? -discipline[:daily_access].to_i 
           : discipline[:daily_access] }
-        return JSON.parse(result.to_json)
       else
         return {data: "No data"}
       end
