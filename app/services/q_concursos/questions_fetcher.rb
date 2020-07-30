@@ -46,7 +46,7 @@ module QConcursos
         start_date = full_date.beginning_of_week
         end_date = full_date.end_of_week
         
-        questions = parsed_questions[40..50].map do |question|
+        questions = parsed_questions.map do |question|
           date = parsed_date(question[:date])
           
           if date.between?(start_date, end_date)
@@ -68,7 +68,7 @@ module QConcursos
           end
         end
       else 
-        { data: "No data"} 
+        { "No data" } 
       end
       
       unless questions.blank?
