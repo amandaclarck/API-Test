@@ -8,7 +8,7 @@ class QConcursosRepository
 
   def request
     if action.eql? "get"
-      @response = HTTPClient.get(url: full_url)
+      @response = HttpClientHelper.get(url: full_url, content_type: :json)
     end
 
     parse_response

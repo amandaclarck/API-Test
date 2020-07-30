@@ -2,7 +2,7 @@
 
 require "net/https"
 
-module HTTPClient
+module HttpClientHelper
   CONTENT_TYPE_HASH = {
     xml: "text/xml",
     json: "application/json"
