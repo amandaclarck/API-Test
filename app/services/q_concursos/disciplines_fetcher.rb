@@ -24,8 +24,10 @@ module QConcursos
     def parse_disciplines
       order = "DESC"
 
-      disciplines.map do |discipline|
-        unless DateTime.parse(discipline["created_at"]) <= 24.hours.ago..Time.now
+      disciplines_array = disciplines.map do |discipline|
+        date = discipline["created_at"]
+
+        if DateTime.parse(date).between?(24.hours.ago, Time.now)
           {
             "id": discipline["id"],
             "statement": discipline["statement"],
@@ -33,12 +35,18 @@ module QConcursos
             "answer": discipline["answer"],
             "daily_access": discipline["daily_access"],
             "discipline": discipline["discipline"],
-            "created_at": discipline["created_at"]
+            "created_at": date
           }
         end
+      end.reject(&:blank?)
+      
+      if !disciplines_array.blank?
+        result = disciplines_array.sort_by { |discipline| order == "DESC" ? -discipline[:daily_access].to_i 
+          : discipline[:daily_access] }
+        return JSON.parse(result.to_json)
+      else
+        return {data: "No data"}
       end
-      .reject!(&:blank?)
-      .sort_by { |discipline| order == "DESC" ? -discipline[:daily_access].to_i : discipline[:daily_access] }
     end
   end
 end
