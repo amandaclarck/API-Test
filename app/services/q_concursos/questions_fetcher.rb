@@ -36,9 +36,9 @@ module QConcursos
     end
 
     def filtered_questions
-      year = params_date[:year].to_i
-      month = params_date[:month].to_i
-      day = params_date[:day].to_i
+      year = params_date["year"].to_i
+      month = params_date["month"].to_i
+      day = params_date["day"].to_i
       is_month_is_year = is_month(month) && is_year(year)
 
       if is_day(day) && is_month_is_year
@@ -68,7 +68,7 @@ module QConcursos
           end
         end
       else 
-        { "No data" } 
+        return "No data"
       end
       
       unless questions.blank?
