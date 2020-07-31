@@ -61,7 +61,7 @@ module QConcursos
         end
       elsif is_year(year)
         questions = parsed_questions.map do |question|
-          if year == parsed_date(question[:date]).year
+          if year.eql? parsed_date(question[:date]).year
             question
           end
         end
