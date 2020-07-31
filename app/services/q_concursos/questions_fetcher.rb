@@ -30,7 +30,7 @@ module QConcursos
           "date": question["date"],
           "times_accessed": question["times_accessed"]
         }
-      end.sort_by {|question| [ -question[:times_accessed].to_i, -DateTime.parse(question[:date]).to_i ]}
+      end
     end
 
     def filtered_questions
@@ -70,7 +70,7 @@ module QConcursos
       end
       
       unless questions.blank?
-        questions.reject(&:blank?).sort_by { |question| -question[:times_accessed]}
+        questions.reject(&:blank?).sort_by {|question| [ -question[:times_accessed].to_i, -DateTime.parse(question[:date]).to_i ]}
       end
     end
 
