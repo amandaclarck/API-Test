@@ -24,15 +24,13 @@ module QConcursos
     end
 
     def parse_questions
-      order = "DESC"
-      
       @parsed_questions = questions.map do |question|
         {
           "question_id": question["question_id"],
           "date": question["date"],
           "times_accessed": question["times_accessed"]
         }
-      end.sort_by { |question| order == "DESC" ? -question[:times_accessed].to_i : question[:times_accessed] }
+      end.sort_by {|question| [ -question[:times_accessed].to_i, -DateTime.parse(question[:date]).to_i ]}
     end
 
     def filtered_questions
