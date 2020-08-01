@@ -25,7 +25,46 @@ This is a API developed for a QConcursos' test. There's two main features here:
 
 ## Running:
   - Download `Postman` program
-  - Access http://localhost:3000/api/disciplines 
+    # Disciplines
+      - Set headers like:
+        - `Content-Type: application/json`
+        - `Accept: application/json`
+        - Set http request to `GET`
+        - Put `http://localhost:3000/api/disciplines` in url location to get disciplines that were accessed the most in the last 24 hours
+    
+    # Questions
+      - Set headers like:
+        - `Content-Type: application/json`
+        - `Accept: application/json`
+        - Set http request to `POST`
+        - Set body as `raw`
+          # Most accessed questions of the year:
+
+            You just have to feel the year field
+
+            ```{
+                "year": "2020",
+                "month": "",
+                "day": ""
+              }```
+          # Most accessed questions of the month and year:
+
+            You just have to feel month and year fields
+
+            ```{
+                "year": "2020",
+                "month": "07",
+                "day": ""
+              }```
+          # Most accessed questions of the week:
+
+            Fill up every field with a valid date number
+
+            ```{
+                "year": "2020",
+                "month": "07",
+                "day": "01"
+              }```
 
 ## Test:
   - ```rspec```
