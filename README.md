@@ -38,6 +38,8 @@ This is a API developed for a QConcursos' test. There's two main features here:
         - `Accept: application/json`
         - Set http request to `POST`
         - Set body as `raw`
+        - Add to request body one of the following payloads below:
+
           ## Most accessed questions of the year:
 
             You just have to feel the year field:
