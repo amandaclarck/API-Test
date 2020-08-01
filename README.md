@@ -43,7 +43,7 @@ This is a API developed for a QConcursos' test. There's two main features here:
           ## Most accessed questions of the year:
 
             You just have to feel the year field:
-            `{
+             `{
                 "year": "2020",
                 "month": "",
                 "day": ""
@@ -59,7 +59,7 @@ This is a API developed for a QConcursos' test. There's two main features here:
               }`
           ## Most accessed questions of the week:
 
-            Fill up every field with a valid date number
+            Fill up every field with a valid date number. It'll return most accessed questions from the beginning of the week until the end of the week of the given date
 
              `{
                 "year": "2020",
