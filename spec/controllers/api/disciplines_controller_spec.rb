@@ -5,7 +5,7 @@ require "rails_helper"
 
 describe Api::DisciplinesController, type: :controller do
   describe "GET /disciplines" do
-    it "lists the disciplines most accessed in 24 hours" do
+    it "lists the disciplines" do
       stub_request(:get, "/api/disciplines/").to_return(status: 200)
 
       allow(QConcursos::DisciplinesFetcher).to receive(:perform)
