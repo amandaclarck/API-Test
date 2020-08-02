@@ -8,7 +8,7 @@ describe QConcursosRepository do
       allow(QConcursosRepository).to receive(:new).with(args: {})
 
       described_class.new({args: {}})
-      
+
       expect(QConcursosRepository).to have_received(:new).with(args: {})
     end
   end

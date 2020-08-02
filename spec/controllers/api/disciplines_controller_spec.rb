@@ -9,7 +9,7 @@ describe Api::DisciplinesController, type: :controller do
       stub_request(:get, "/api/disciplines/").to_return(status: 200)
 
       allow(QConcursos::DisciplinesFetcher).to receive(:perform)
-      
+
       get :index
 
       expect(QConcursos::DisciplinesFetcher).to have_received(:perform)

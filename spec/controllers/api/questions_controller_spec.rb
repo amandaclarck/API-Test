@@ -6,7 +6,7 @@ require "rails_helper"
 describe Api::QuestionsController, type: :controller do
   describe "POST /filter" do
     it "lists the questions most accessed" do
-      params =  { body: { "year": "2020" } }
+      params = {body: {"year": "2020"}}
 
       stub_request(:post, "/api/questions/filter").with(params)
         .to_return(status: 200)

@@ -16,7 +16,7 @@ module QConcursos
     end
 
     def fetch_disciplines
-      return Rails.cache.fetch(@disciplines, :expires_in => 10.minutes){
+      Rails.cache.fetch(@disciplines, expires_in: 10.minutes) {
         @disciplines = adapter.get_disciplines
       }
     end
@@ -24,7 +24,7 @@ module QConcursos
     def parse_disciplines
       order = "DESC"
 
-      disciplines_array = disciplines.map do |discipline|
+      disciplines_array = disciplines.map { |discipline|
         date = discipline["created_at"]
 
         if DateTime.parse(date).between?(24.hours.ago, Time.now)
@@ -38,13 +38,15 @@ module QConcursos
             "created_at": date
           }
         end
-      end.reject(&:blank?)
-      
+      }.reject(&:blank?)
+
       if !disciplines_array.blank?
-        return disciplines_array.sort_by { |discipline| order == "DESC" ? -discipline[:daily_access].to_i 
-          : discipline[:daily_access] }
+        disciplines_array.sort_by { |discipline|
+          order == "DESC" ? -discipline[:daily_access].to_i
+                  : discipline[:daily_access]
+        }
       else
-        return "No data"
+        "No data"
       end
     end
   end

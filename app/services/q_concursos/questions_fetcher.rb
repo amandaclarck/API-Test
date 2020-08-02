@@ -18,19 +18,19 @@ module QConcursos
     end
 
     def fetch_questions
-      return Rails.cache.fetch(@questions, :expires_in => 10.minutes){
+      Rails.cache.fetch(@questions, expires_in: 10.minutes) {
         @questions = adapter.get_questions
       }
     end
 
     def parse_questions
-      @parsed_questions = questions.map do |question|
+      @parsed_questions = questions.map { |question|
         {
           "question_id": question["question_id"],
           "date": question["date"],
           "times_accessed": question["times_accessed"]
         }
-      end
+      }
     end
 
     def filtered_questions
@@ -43,34 +43,34 @@ module QConcursos
         full_date = Time.parse([year, month, day].join("-"))
         start_date = full_date.beginning_of_week
         end_date = full_date.end_of_week
-        
-        questions = parsed_questions.map do |question|
+
+        questions = parsed_questions.map { |question|
           date = parsed_date(question[:date])
-          
+
           if date.between?(start_date, end_date)
             question
           end
-        end
+        }
       elsif is_month_is_year
-        questions = parsed_questions.map do |question|
+        questions = parsed_questions.map { |question|
           date = parsed_date(question[:date])
-          
-          if (year.eql? date.year and month.eql? date.month)
+
+          if year.eql?(date.year) && month.eql?(date.month)
             question
           end
-        end
+        }
       elsif is_year(year)
-        questions = parsed_questions.map do |question|
+        questions = parsed_questions.map { |question|
           if year.eql? parsed_date(question[:date]).year
             question
           end
-        end
-      else 
+        }
+      else
         return "No data"
       end
-      
+
       unless questions.blank?
-        questions.reject(&:blank?).sort_by {|question| [ -question[:times_accessed].to_i, -DateTime.parse(question[:date]).to_i ]}
+        questions.reject(&:blank?).sort_by { |question| [-question[:times_accessed].to_i, -DateTime.parse(question[:date]).to_i] }
       end
     end
 

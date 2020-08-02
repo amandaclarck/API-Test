@@ -14,7 +14,7 @@ module HttpClientHelper
     request = Net::HTTP::Put.new(uri.request_uri)
     request.body = args[:body]
     request["Content-Type"] = CONTENT_TYPE_HASH[args[:content_type]]
-    
+
     args[:headers]&.each do |header, value|
       request[header] = value
     end
@@ -41,7 +41,7 @@ module HttpClientHelper
     end
 
     http = Net::HTTP.new(uri.host, uri.port)
-		http.use_ssl = (uri.scheme == "https")
+    http.use_ssl = (uri.scheme == "https")
 
     Rails.logger.info("HTTP POST Request: #{uri} - #{request.body} | Headers: #{request.to_hash.inspect}")
     response = http.request(request)
@@ -52,8 +52,8 @@ module HttpClientHelper
   def self.get(args)
     uri = URI(args[:url])
     req = Net::HTTP::Get.new(uri)
-    
-    res = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') {|http|
+
+    res = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == "https") { |http|
       http.request(req)
     }
   end
