@@ -12,7 +12,7 @@ module Api
     private
 
     def date_params
-      json_params = JSON.parse(request.raw_post)
+      JSON.parse(request.raw_post)
     end
   end
 end
