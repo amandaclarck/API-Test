@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QConcursosAdapter
   def self.get_questions
     args = parameters(action: "get", path: "question_access.json")

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QConcursosRepository
   def initialize(args)
     @action = args[:action]
