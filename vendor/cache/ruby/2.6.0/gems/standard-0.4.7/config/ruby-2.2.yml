@@ -1,8 +1,0 @@
-inherit_from: ./base.yml
-
-AllCops:
-  TargetRubyVersion: 2.4 # The oldest supported
-
-Layout:
-  HeredocIndentation:
-    Enabled: false
