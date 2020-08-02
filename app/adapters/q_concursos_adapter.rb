@@ -13,8 +13,6 @@ class QConcursosAdapter
     QConcursosRepository.new(args).request
   end
 
-  private
-
   def self.parameters(args)
     {
       action: args[:action],
