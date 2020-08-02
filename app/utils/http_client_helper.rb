@@ -43,16 +43,14 @@ module HttpClientHelper
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = (uri.scheme == "https")
 
-    response = http.request(request)
-    Rails.logger.info("HTTP POST Response: #{response.code} - #{response.body}")
-    response
+    http.request(request)
   end
 
   def self.get(args)
     uri = URI(args[:url])
     req = Net::HTTP::Get.new(uri)
 
-    res = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == "https") { |http|
+    Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == "https") { |http|
       http.request(req)
     }
   end
