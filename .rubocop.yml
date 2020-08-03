@@ -6,3 +6,6 @@ Style/Documentation:
 
 Layout/LineLength:
   Max: 99
+
+Exclude:
+  - bin/rails
