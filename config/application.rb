@@ -1,4 +1,4 @@
-require_relative 'boot'
+require_relative "boot"
 
 require "rails"
 require "active_model/railtie"
@@ -16,6 +16,7 @@ module QConcursos
     config.load_defaults 6.0
     config.api_only = true
     config.autoload_paths += ["#{Rails.root}/services"]
+    config.autoload_paths += ["#{Rails.root}/repositories"]
     config.session_store = :cookie_store
   end
 end

@@ -1,24 +1,71 @@
-# README
+## QConcursos Test API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a API developed for a QConcursos' test. There's two main features here:
+* Listing the disciplines that were accessed the most in the last 24 hours
+* List the most accessed questions by week/month/year
 
-Things you may want to cover:
+## Requirements
+  - Ruby version: 2.6.5
+  - Rails version: 6.0.3
+  - Postgresql
+  - Unix based systems
 
-* Ruby version
+## Setup:
+  - ```bundle install```
+  - Create the file config/database.yml (there's a `database.yml.example` as example)
+    - ```rails db:create```
+    - ```rails db:migrate```
+  - Create the .env file (there's a `.env.example` as example)
+    - In case you don't want to use .env, you can edit follow the steps:
+      - ```sudo nano ~/.bashrc```
+      - Add in the end of the file `export URL=https://raw.githubusercontent.com/qcx/desafio-backend/master/`
+      - Ctrl + X
+      - Confirm the editing by typing S or Y (it depends of your computer language)
+      - ```source ~/.bashrc```
 
-* System dependencies
+## Running:
+  - Download `Postman` program
+    ## Disciplines
+      - Set headers like:
+        - `Content-Type: application/json`
+        - `Accept: application/json`
+        - Set http request to `GET`
+        - Put `http://localhost:3000/api/disciplines` in url location to get disciplines that were accessed the most in the last 24 hours
+    
+    ## Questions
+      - Set headers like:
+        - `Content-Type: application/json`
+        - `Accept: application/json`
+        - Set http request to `POST`
+        - Set body as `raw`
+        - Add to request body one of the following payloads below:
 
-* Configuration
+          ## Most accessed questions of the year:
 
-* Database creation
+            You just have to feel the year field:
+             `{
+                "year": "2020",
+                "month": "",
+                "day": ""
+              }`
+          ## Most accessed questions of the month and year:
 
-* Database initialization
+            You just have to feel month and year fields
 
-* How to run the test suite
+             `{
+                "year": "2020",
+                "month": "07",
+                "day": ""
+              }`
+          ## Most accessed questions of the week:
 
-* Services (job queues, cache servers, search engines, etc.)
+            Fill up every field with a valid date number. It'll return most accessed questions from the beginning of the week until the end of the week of the given date
 
-* Deployment instructions
+             `{
+                "year": "2020",
+                "month": "07",
+                "day": "01"
+              }`
 
-* ...
+## Test:
+  - ```bundle exec rspec```

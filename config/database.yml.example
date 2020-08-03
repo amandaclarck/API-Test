@@ -1,0 +1,21 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: vendhq_development
+  pool: 5
+  username:
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: vendhq_test
+  pool: 5
+  username: 
+  password: 
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: <%= ENV['DB_POOL'] || ENV['MAX_THREADS'] || 5 %>
