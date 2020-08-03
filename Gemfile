@@ -21,6 +21,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "rspec-rails"
   gem "dotenv-rails"
+  gem "shoulda-matchers"
   gem "webmock"
   gem "standardrb"
 end
@@ -34,7 +35,6 @@ end
 
 group :test do
   gem "selenium-webdriver"
-  gem "shoulda-matchers"
   gem "rack-test"
 end
 
