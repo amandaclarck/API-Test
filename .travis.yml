@@ -10,6 +10,6 @@ before_install:
   - bundle exec rake db:migrate
 script:
   - bundle exec standardrb
-  - xvfb-run bundle exec rspec
+  - bundle exec rspec
 services:
   - postgresql
