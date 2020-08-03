@@ -13,7 +13,7 @@ describe Api::QuestionsController, type: :controller do
 
       allow(QConcursos::QuestionsFetcher).to receive(:perform).with(args: params)
 
-      obj = double(QConcursos::QuestionsFetcher.perform(args: params))
+      double(QConcursos::QuestionsFetcher.perform(args: params))
 
       expect(QConcursos::QuestionsFetcher).to have_received(:perform).with(args: params)
     end
